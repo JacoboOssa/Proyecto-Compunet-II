@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+
+    <entity class="co.edu.icesi.viajes.domain.Cliente">
+        <named-native-query name="Cliente.consultarClientesPorNombre" result-set-mapping="Cliente.consultarClientesPorNombre">
+            <query>
+                SELECT numero_identificacion,primer_apellido,segundo_apellido,nombre,estado,id_tiid
+                FROM cliente c
+                WHERE c.nombre LIKE :pNombre
+                ORDER BY nombre ASC
+            </query>
+        </named-native-query>
+        <named-native-query name="Cliente.consultarClientesPorTipoId" result-set-mapping="Cliente.consultarClientesPorTipoId">
+            <query>
+                SELECT c.numero_identificacion,c.primer_apellido,c.segundo_apellido,
+                c.nombre AS nombreCliente,
+                tiid.nombre AS nombreTipoId
+                FROM cliente c
+                JOIN tipo_identificacion tiid ON c.id_tiid = tiid.id_tiid
+                WHERE tiid.nombre = :pNombre
+            </query>
+        </named-native-query>
+
+    </entity>
+
+    <entity class="co.edu.icesi.viajes.domain.Destino">
+        <named-native-query name="Destino.consultaDestinosPorTipoDest" result-set-mapping="Destino.consultaDestinosPorTipoDest">
+            <query>
+                SELECT d.nombre AS nombreDest,
+                d.descripcion
+                FROM tipo_destino td
+                JOIN destino d
+                ON td.id_tide = d.id_tide
+                WHERE td.nombre= :pNombre
+            </query>
+        </named-native-query>
+
+    </entity>
+
+    <entity class="co.edu.icesi.viajes.domain.DetallePlan">
+
+    </entity>
+
+    <entity class="co.edu.icesi.viajes.domain.Plan">
+
+    </entity>
+
+    <entity class="co.edu.icesi.viajes.domain.TipoDestino">
+        <named-native-query name="TipoDestino.consultarTipoDestinoPorEstado" result-set-mapping="TipoDestino.consultarTipoDestinoPorEstado">
+            <query>
+                SELECT id_tide,codigo,nombre FROM tipo_destino td WHERE td.estado = :pEstado
+            </query>
+        </named-native-query>
+
+    </entity>
+
+    <entity class="co.edu.icesi.viajes.domain.TipoIdentificacion">
+
+    </entity>
+
+    <entity class="co.edu.icesi.viajes.domain.Usuario">
+
+    </entity>
+
+</entity-mappings>
