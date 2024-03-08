@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
     //2.    Consultar a todos los clientes por estado. Esta consulta debe ser paginada y ordenada de forma ascendente por número de identificación.
@@ -31,12 +32,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
     //10. Consultar clientes por apellido (tener en cuenta los campos primer y segundo apellido)
     List<Cliente> findClientesByPrimerApellidoAndSegundoApellido(String primerApellido, String segundoApellido);
 
+    //15. Consulta Plan y Detalles de Plan dado el ID del CLiente
+    @Query(nativeQuery = true)
+    List<ClienteDTO> consultarPlanPorCliente(@Param("pNumeroId") String id);
     //16. Consultar todos los clientes con los siguientes filtros:
     // Estado, número identificación, tipo de identificación, nombre (con Like)
     // en orden ascendente. (debe de ser una sola consulta y los filtros pueden ser opcionales).
     @Query(nativeQuery = true)
-    List<ClienteDTO> consultarClientesPorNombre(@Param("pNombre") String nombre);
-
-
-
+    List<ClienteDTO> consultarClientesPorNombre(@Param("pEstado") String estado, @Param("pId") String id, @Param("pCodigo") String codigo, @Param("pNombre") String nombre);
 }

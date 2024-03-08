@@ -8,13 +8,13 @@ import java.util.Date;
 @Data
 public class ClienteDTO implements Serializable {
 
-    public ClienteDTO(String numeroIdentificacion,String primerApellido, String segundoApellido,String nombre,String estado,Integer idTiid) {
+    public ClienteDTO(String numeroIdentificacion,String primerApellido, String segundoApellido,String nombre,String estado,String codigo) {
         this.numeroIdentificacion = numeroIdentificacion;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.nombre = nombre;
         this.estado = estado;
-        this.idTiid = idTiid;
+        this.codigo = codigo;
     }
 
     public ClienteDTO(String numeroIdentificacion, String primerApellido, String segundoApellido, String nombre, String nombreTipoId) {
@@ -23,6 +23,22 @@ public class ClienteDTO implements Serializable {
         this.segundoApellido = segundoApellido;
         this.nombre = nombre;
         this.nombreTipoId = nombreTipoId;
+    }
+
+    public ClienteDTO (String numeroIdentificacion,String primerApellido,String segundoApellido,String nombre, String descripcionSolicitud,Integer cantidadPersonas, String alimentacion, String hospedaje, String transporte, String traslados, Double valor, Integer cantidadNoches, Integer cantidadDias){
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.nombre = nombre;
+        this.descripcionSolicitud = descripcionSolicitud;
+        this.cantidadPersonas = cantidadPersonas;
+        this.alimentacion = alimentacion;
+        this.hospedaje = hospedaje;
+        this.transporte = transporte;
+        this.traslados = traslados;
+        this.valor = valor;
+        this.cantidadNoches = cantidadNoches;
+        this.cantidadDias = cantidadDias;
     }
 
     @Serial
@@ -45,4 +61,15 @@ public class ClienteDTO implements Serializable {
     private String estado;
     private Integer idTiid;
     private String nombreTipoId;
+    private String codigo;
+
+    private String descripcionSolicitud;
+    private Integer cantidadPersonas;
+    private String alimentacion;
+    private String hospedaje;
+    private String transporte;
+    private String traslados;
+    private Double valor;
+    private Integer cantidadNoches;
+    private Integer cantidadDias;
 }

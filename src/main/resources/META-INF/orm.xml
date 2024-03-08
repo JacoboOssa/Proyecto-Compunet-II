@@ -6,10 +6,14 @@
     <entity class="co.edu.icesi.viajes.domain.Cliente">
         <named-native-query name="Cliente.consultarClientesPorNombre" result-set-mapping="Cliente.consultarClientesPorNombre">
             <query>
-                SELECT numero_identificacion,primer_apellido,segundo_apellido,nombre,estado,id_tiid
-                FROM cliente c
-                WHERE c.nombre LIKE :pNombre
-                ORDER BY nombre ASC
+                SELECT c.numero_identificacion, c.primer_apellido, c.segundo_apellido, c.nombre, c.estado, td.codigo
+                FROM cliente AS c
+                JOIN tipo_identificacion AS td ON c.id_tiid = td.id_tiid
+                WHERE (c.estado = :pEstado OR :pEstado = '')
+                AND (c.numero_identificacion = :pId OR :pId = '')
+                AND (td.codigo = :pCodigo OR :pCodigo = '')
+                AND (c.nombre LIKE CONCAT('%', :pNombre, '%') OR :pNombre = '')
+                ORDER BY c.nombre ASC
             </query>
         </named-native-query>
         <named-native-query name="Cliente.consultarClientesPorTipoId" result-set-mapping="Cliente.consultarClientesPorTipoId">
@@ -20,6 +24,18 @@
                 FROM cliente c
                 JOIN tipo_identificacion tiid ON c.id_tiid = tiid.id_tiid
                 WHERE tiid.nombre = :pNombre
+            </query>
+        </named-native-query>
+        <named-native-query name="Cliente.consultarPlanPorCliente" result-set-mapping="Cliente.consultarPlanPorCliente">
+            <query>
+                SELECT c.numero_identificacion,c.primer_apellido,c.segundo_apellido,c.nombre,p.descripcion_solicitud,p.cantidad_personas, dp.alimentacion,dp.hospedaje,dp.transporte,dp.traslados,dp.valor,dp.cantidad_noches,dp.cantidad_dias
+                FROM cliente AS c
+                JOIN plan AS p
+                ON c.id_clie = p.id_clie
+                JOIN detalle_plan AS dp
+                ON p.id_plan=dp.id_plan
+                WHERE c.numero_identificacion = :pNumeroId
+                AND c.estado='A' AND p.estado='A' AND dp.estado='A'
             </query>
         </named-native-query>
 
@@ -44,6 +60,7 @@
     </entity>
 
     <entity class="co.edu.icesi.viajes.domain.Plan">
+
 
     </entity>
 

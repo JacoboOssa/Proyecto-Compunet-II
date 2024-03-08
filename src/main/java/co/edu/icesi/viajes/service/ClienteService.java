@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ClienteService extends GenericService<Cliente, Integer>{
     Page<Cliente> findByEstadoOrderByNumeroIdentificacionAsc(String estado, Pageable pageable);
@@ -18,9 +19,8 @@ public interface ClienteService extends GenericService<Cliente, Integer>{
 
     int countByEstado(String estado);
     List<Cliente> findClientesByPrimerApellidoAndSegundoApellido(String primerApellido, String segundoApellido);
-    List<ClienteDTO> consultarClientesPorNombre(@Param("pNombre") String nombre);
-
-    Page<ClienteDTO> consultarClientesPorTipoId(@Param("pNombre") String nombre, Pageable pageable);
+    List<ClienteDTO> consultarClientesPorNombre(@Param("pEstado") String estado, @Param("pId") String id, @Param("pCodigo") String codigo, @Param("pNombre") String nombre);
+    List<ClienteDTO> consultarPlanPorCliente(@Param("pNumeroId") String id);
 
 
 

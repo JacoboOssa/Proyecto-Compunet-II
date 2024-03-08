@@ -97,14 +97,15 @@ public class ClienteServiceImpl implements ClienteService{
         return clienteRepository.findClientesByPrimerApellidoAndSegundoApellido(primerApellido, segundoApellido);
     }
 
+
     @Override
-    public List<ClienteDTO> consultarClientesPorNombre(String nombre) {
-        return clienteRepository.consultarClientesPorNombre(nombre);
+    public List<ClienteDTO> consultarClientesPorNombre(String estado, String id, String codigo, String nombre) {
+        return clienteRepository.consultarClientesPorNombre(estado,id,codigo,nombre);
     }
 
     @Override
-    public Page<ClienteDTO> consultarClientesPorTipoId(String nombre, Pageable pageable) {
-        return clienteRepository.consultarClientesPorTipoId(nombre, pageable);
+    public List<ClienteDTO> consultarPlanPorCliente(String id) {
+        return clienteRepository.consultarPlanPorCliente(id);
     }
 
 

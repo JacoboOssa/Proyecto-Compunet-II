@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class ClienteTest {
@@ -74,18 +75,18 @@ public class ClienteTest {
     }
 
     @Test
-    void debeRetornarListaClientesPorNombre(){
-        List<ClienteDTO> lstClientes = clienteService.consultarClientesPorNombre("Juan");
-        for(ClienteDTO cliente : lstClientes){
-            System.out.println(cliente.getNombre() + "-" + cliente.getPrimerApellido() + "-" + cliente.getSegundoApellido());
+    void debeRetornarClientesPorDistintosFiltrosOpcionales(){
+        List<ClienteDTO> lstClientes = clienteService.consultarClientesPorNombre("A","","TI", "");
+        for(ClienteDTO client : lstClientes){
+            System.out.println(client.getNombre() + "-" + client.getPrimerApellido() + "-" + client.getSegundoApellido());
         }
     }
 
     @Test
-    void debeRetornarClientesPorNombreId(){
-        Page<ClienteDTO> lstClientes = clienteService.consultarClientesPorTipoId("TARJETA DE IDENTIDAD", Pageable.unpaged());
+    void debeRetornarPlanPorIdCliente(){
+        List<ClienteDTO> lstClientes = clienteService.consultarPlanPorCliente("23456789");
         for(ClienteDTO client : lstClientes){
-            System.out.println(client.getNombre() + "-" + client.getPrimerApellido() + "-" + client.getSegundoApellido());
+            System.out.println(client.getNumeroIdentificacion() + " - " + client.getNombre() + " - " + client.getPrimerApellido() + " - " + client.getSegundoApellido() + " - " + client.getDescripcionSolicitud() + " - " + client.getCantidadPersonas() + " - " + client.getAlimentacion() + " - " + client.getHospedaje() + " - " + client.getTransporte() + " - " + client.getTraslados() + " - " + client.getValor() + " - " +client.getCantidadNoches() + " - " +client.getCantidadDias());
         }
     }
 

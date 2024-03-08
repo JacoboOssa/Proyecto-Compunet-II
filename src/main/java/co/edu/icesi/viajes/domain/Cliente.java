@@ -13,6 +13,10 @@ import java.util.Date;
         @NamedNativeQuery(name = "Cliente.consultarClientesPorTipoId",
                 query="",
                 resultSetMapping = "Cliente.consultarClientesPorTipoId"
+        ),
+        @NamedNativeQuery(name="Cliente.consultarPlanPorCliente",
+                query = "",
+                resultSetMapping = "Cliente.consultarPlanPorCliente"
         )
 })
 
@@ -26,7 +30,7 @@ import java.util.Date;
                                 @ColumnResult(name = "segundo_apellido", type = String.class),
                                 @ColumnResult(name = "nombre", type = String.class),
                                 @ColumnResult(name = "estado", type = String.class),
-                                @ColumnResult(name = "id_tiid", type = Integer.class),
+                                @ColumnResult(name = "codigo", type = String.class),
                         })
 
                 }
@@ -43,7 +47,27 @@ import java.util.Date;
                         })
 
                 }
+        ),
+        @SqlResultSetMapping(
+                name = "Cliente.consultarPlanPorCliente",
+                classes = { @ConstructorResult(targetClass = ClienteDTO.class,
+                        columns = {
+                                @ColumnResult(name = "numero_identificacion", type = String.class),
+                                @ColumnResult(name = "primer_apellido", type = String.class),
+                                @ColumnResult(name = "segundo_apellido", type = String.class),
+                                @ColumnResult(name = "nombre", type = String.class),
+                                @ColumnResult(name = "descripcion_solicitud", type = String.class),
+                                @ColumnResult(name = "cantidad_personas", type = Integer.class),
+                                @ColumnResult(name = "alimentacion", type = String.class),
+                                @ColumnResult(name = "hospedaje", type = String.class),
+                                @ColumnResult(name = "transporte", type = String.class),
+                                @ColumnResult(name = "traslados", type = String.class),
+                                @ColumnResult(name = "valor", type = Double.class),
+                                @ColumnResult(name = "cantidad_noches", type = Integer.class),
+                                @ColumnResult(name = "cantidad_dias", type = Integer.class)
+                        })
 
+                }
         )
 })
 
